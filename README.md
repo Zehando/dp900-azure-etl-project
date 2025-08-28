@@ -19,7 +19,7 @@ The pipeline ingests batch data from hive sensors, enriches it with external wea
 
 The project follows the Medallion architecture to ensure data quality and governance, progressively refining data through three layers within Azure Data Lake Storage Gen2. This GIF shows the final folder structure in Azure Blob Storage.
 
-![GIF of the data folder structure in Azure Blob Storage](./gifs/data-folder-structure.gif)
+![GIF of the data folder structure in Azure Blob Storage](./gifs/BlobStorageStructure.gif)
 
 * **🥉 Bronze Layer:** Ingests and stores raw, unaltered source data.
 * **🥈 Silver Layer:** Contains cleaned, validated, and standardized data in the efficient Parquet format.
@@ -72,10 +72,10 @@ The project files are organized as follows to allow for easy replication.
 bee-haven-azure-pipeline/
 │
 ├── gifs/
-│   ├── data-folder-structure.gif
-│   ├── pipeline-bronzetosilver.gif
-│   ├── pipeline-silvertogold.gif
-│   └── pipeline-execution.gif
+│   ├── BlobStorageStructure.gif
+│   ├── bronzetosilverpipeline.gif
+│   ├── silvertogoldpipeline.gif
+│   └── PipelineExecution.gif
 │
 ├── notebooks/
 │   ├── notebook_bronze_to_silver.ipynb
@@ -102,12 +102,12 @@ The entire ETL process is managed by a master ADF pipeline that runs on a 12-hou
 ### Master Orchestration Pipeline
 This pipeline controls the end-to-end workflow by executing the Bronze-to-Silver and Silver-to-Gold pipelines sequentially, with a 5-minute wait in between. The GIF below shows the pipeline being triggered and monitored.
 
-![GIF of the final pipeline execution](./gifs/pipeline-execution.gif)
+![GIF of the final pipeline execution](./gifs/PipelineExecution.gif)
 
 ### Bronze-to-Silver Pipeline (`bronzetosilver`)
 This pipeline refines raw data from the Bronze layer to the Silver layer. The GIF below shows the structure of the activities in Azure Data Factory.
 
-![GIF of the Bronze-to-Silver pipeline](./gifs/pipeline-bronzetosilver.gif)
+![GIF of the Bronze-to-Silver pipeline](./gifs/bronzetosilverpipeline.gif)
 
 * **Transformation Logic (Synapse Notebook):** The core of this pipeline is a Python notebook that performs:
     * **Structural Correction:** Splits the `flow.csv` data into separate `arrivals` and `departures` datasets.
@@ -120,7 +120,7 @@ This pipeline refines raw data from the Bronze layer to the Silver layer. The GI
 ### Silver-to-Gold Pipeline (`silvertogold`)
 This pipeline aggregates the cleaned data from the Silver layer into a final, analysis-ready table in the Gold layer.
 
-![GIF of the Silver-to-Gold pipeline](./gifs/pipeline-silvertogold.gif)
+![GIF of the Silver-to-Gold pipeline](./gifs/silvertogoldpipeline.gif)
 
 * **Transformation Logic (Synapse Notebook):**
     * **Data Consolidation:** Reads all recently processed Parquet files from the Silver layer and performs an **outer merge** to create a single, wide table.
