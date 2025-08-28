@@ -126,3 +126,11 @@ This pipeline aggregates the cleaned data from the Silver layer into a final, an
     * **Data Consolidation:** Reads all recently processed Parquet files from the Silver layer and performs an **outer merge** to create a single, wide table.
     * **Schema Refinement:** Renames columns to distinguish between data sources (e.g., `temperature_hive` vs. `temperature_weather`).
     * **Final Assembly:** Enforces a predefined final schema on the table to ensure consistency for downstream analytics.
+
+## Contact
+
+For any questions or feedback, feel free to reach out:
+
+* **GitHub:** [@zehando](https://github.com/zehando)
+* **LinkedIn:** [Sahand Azizi](https://www.linkedin.com/in/sahandazizi/)
+* **Email:** azizisahand@gmail.com
